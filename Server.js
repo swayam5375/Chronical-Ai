@@ -34,9 +34,6 @@ const msg = req.body.message;
         });
     }
 
-    console.log("User Message:", msg);
-    console.log("API Key Found:", API_KEY ? "YES" : "NO");
-
     const response = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`,
         {
@@ -66,7 +63,6 @@ User: ${msg}`
 ```
     const data = await response.json();
 
-    console.log("Gemini Response:");
     console.log(JSON.stringify(data, null, 2));
 
     const reply =
@@ -76,7 +72,6 @@ User: ${msg}`
     res.json({ reply });
 
 } catch (err) {
-    console.error("SERVER ERROR:");
     console.error(err);
 
     res.json({
@@ -88,5 +83,7 @@ User: ${msg}`
 });
 
 app.listen(process.env.PORT || 3000, () => {
-console.log("Server running on port " + (process.env.PORT || 3000));
+console.log(
+`Server running on port ${process.env.PORT || 3000}`
+);
 });
