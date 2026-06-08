@@ -14,7 +14,6 @@ app.get("/", (req, res) => {
 
 app.post("/chat", async (req, res) => {
     try {
-
         const msg = req.body.message;
 
         if (!msg) {
@@ -60,8 +59,6 @@ User: ${msg}`
 
         const data = await response.json();
 
-        console.log(JSON.stringify(data, null, 2));
-
         const reply =
             data?.candidates?.[0]?.content?.parts?.[0]?.text ||
             "Sorry, I couldn't generate a reply.";
@@ -70,7 +67,6 @@ User: ${msg}`
 
     } catch (err) {
         console.error(err);
-
         res.json({
             reply: "AI Error"
         });
@@ -78,7 +74,5 @@ User: ${msg}`
 });
 
 app.listen(process.env.PORT || 3000, () => {
-    console.log(
-        `Server running on port ${process.env.PORT || 3000}`
-    );
+    console.log(`Server running on port ${process.env.PORT || 3000}`);
 });
